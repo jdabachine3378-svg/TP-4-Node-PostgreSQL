@@ -27,42 +27,6 @@ npm install
    - Modifier le fichier `.env` avec vos identifiants PostgreSQL
 
 3. Créer les tables et insérer les données de test :
-```sql
-CREATE DATABASE bibliotheque_db;
-\c bibliotheque_db
-
-CREATE TABLE auteurs (
-    id SERIAL PRIMARY KEY,
-    nom VARCHAR(100) NOT NULL,
-    prenom VARCHAR(100) NOT NULL,
-    date_naissance DATE,
-    nationalite VARCHAR(50),
-    biographie TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE livres (
-    id SERIAL PRIMARY KEY,
-    titre VARCHAR(200) NOT NULL,
-    auteur_id INTEGER REFERENCES auteurs (id) ON DELETE CASCADE,
-    annee_publication INTEGER,
-    genre VARCHAR(50),
-    isbn VARCHAR(20) UNIQUE,
-    resume TEXT,
-    disponible BOOLEAN DEFAULT TRUE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-INSERT INTO auteurs (nom, prenom, date_naissance, nationalite, biographie) VALUES
-('Hugo', 'Victor', '1802-02-26', 'Française', 'Poète et romancier.'),
-('Camus', 'Albert', '1913-11-07', 'Française', 'Philosophe et écrivain.'),
-('Rowling', 'J.K.', '1965-07-31', 'Britannique', 'Auteure de Harry Potter.');
-
-INSERT INTO livres (titre, auteur_id, annee_publication, genre, isbn, resume, disponible) VALUES
-('Les Misérables', 1, 1862, 'Historique', '9782253096344', 'Jean Valjean...', true),
-('L''Étranger', 2, 1942, 'Philosophique', '9782070360024', 'Meursault...', true),
-('Harry Potter à l''école des sorciers', 3, 1997, 'Fantasy', '9782070643028', 'Aventure...', true);
-```
 
 ## Configuration
 
@@ -89,6 +53,8 @@ npm start
 ```
 
 L'application sera accessible sur http://localhost:3000
+<img width="1755" height="840" alt="image" src="https://github.com/user-attachments/assets/049fd04f-c3cc-41f0-afe6-3cfada52dc47" />
+
 
 ## Structure du projet
 
@@ -143,6 +109,5 @@ bibliotheque-app/
 - **dotenv** : Gestion des variables d'environnement
 - **nodemon** : Outil de développement pour rechargement automatique
 
-## Notes
-
-Cette application démontre l'utilisation d'Express, de `pg.Pool` et d'EJS, ainsi que la gestion d'une relation « un-à-plusieurs » entre deux tables PostgreSQL.
+## Auteur :
+DABACHINE JAMILA 
