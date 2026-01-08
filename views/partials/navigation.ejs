@@ -1,0 +1,14 @@
+<nav>
+    <div class="container">
+        <h1><a href="/">Bibliothèque</a></h1>
+        <ul>
+            <li><a href="/">Accueil</a></li>
+            <li><a href="/auteurs">Auteurs</a></li>
+            <li><a href="/livres">Livres</a></li>
+        </ul>
+        <form action="/livres/recherche" method="GET" class="search-form">
+            <input type="text" name="q" placeholder="Rechercher un livre..." value="<%= typeof searchTerm !== 'undefined' ? searchTerm : '' %>">
+            <button type="submit">Rechercher</button>
+        </form>
+    </div>
+</nav>

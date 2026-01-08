@@ -1,0 +1,45 @@
+<%- include('../../partials/header') %>
+<div class="container">
+    <div class="page-header">
+        <h1><%= livre.titre %></h1>
+        <div>
+            <a href="/livres/<%= livre.id %>/modifier" class="btn">Modifier</a>
+            <form action="/livres/<%= livre.id %>/supprimer" method="POST" style="display:inline;">
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?')">Supprimer</button>
+            </form>
+        </div>
+    </div>
+    <div class="details-card">
+        <div class="detail-row">
+            <strong>Titre:</strong> <span><%= livre.titre %></span>
+        </div>
+        <div class="detail-row">
+            <strong>Auteur:</strong> <span><a href="/auteurs/<%= livre.auteur_id %>"><%= livre.auteur_prenom %> <%= livre.auteur_nom %></a></span>
+        </div>
+        <% if (livre.annee_publication) { %>
+            <div class="detail-row">
+                <strong>Année de publication:</strong> <span><%= livre.annee_publication %></span>
+            </div>
+        <% } %>
+        <% if (livre.genre) { %>
+            <div class="detail-row">
+                <strong>Genre:</strong> <span><%= livre.genre %></span>
+            </div>
+        <% } %>
+        <% if (livre.isbn) { %>
+            <div class="detail-row">
+                <strong>ISBN:</strong> <span><%= livre.isbn %></span>
+            </div>
+        <% } %>
+        <div class="detail-row">
+            <strong>Disponible:</strong> <span><%= livre.disponible ? 'Oui' : 'Non' %></span>
+        </div>
+        <% if (livre.resume) { %>
+            <div class="detail-row">
+                <strong>Résumé:</strong>
+                <p><%= livre.resume %></p>
+            </div>
+        <% } %>
+    </div>
+</div>
+<%- include('../../partials/footer') %>

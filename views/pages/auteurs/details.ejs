@@ -1,0 +1,68 @@
+<%- include('../../partials/header') %>
+<div class="container">
+    <div class="page-header">
+        <h1><%= auteur.prenom %> <%= auteur.nom %></h1>
+        <div>
+            <a href="/auteurs/<%= auteur.id %>/modifier" class="btn">Modifier</a>
+            <form action="/auteurs/<%= auteur.id %>/supprimer" method="POST" style="display:inline;">
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet auteur ?')">Supprimer</button>
+            </form>
+        </div>
+    </div>
+    <div class="details-card">
+        <div class="detail-row">
+            <strong>Nom:</strong> <span><%= auteur.nom %></span>
+        </div>
+        <div class="detail-row">
+            <strong>Prénom:</strong> <span><%= auteur.prenom %></span>
+        </div>
+        <% if (auteur.date_naissance) { %>
+            <div class="detail-row">
+                <strong>Date de naissance:</strong> <span class="format-date"><%= auteur.date_naissance %></span>
+            </div>
+        <% } %>
+        <% if (auteur.nationalite) { %>
+            <div class="detail-row">
+                <strong>Nationalité:</strong> <span><%= auteur.nationalite %></span>
+            </div>
+        <% } %>
+        <% if (auteur.biographie) { %>
+            <div class="detail-row">
+                <strong>Biographie:</strong>
+                <p><%= auteur.biographie %></p>
+            </div>
+        <% } %>
+    </div>
+    <div class="related-section">
+        <h2>Livres de cet auteur</h2>
+        <% if (livres && livres.length > 0) { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Année de publication</th>
+                        <th>Genre</th>
+                        <th>Disponible</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% livres.forEach(livre => { %>
+                        <tr>
+                            <td><%= livre.titre %></td>
+                            <td><%= livre.annee_publication || '-' %></td>
+                            <td><%= livre.genre || '-' %></td>
+                            <td><%= livre.disponible ? 'Oui' : 'Non' %></td>
+                            <td>
+                                <a href="/livres/<%= livre.id %>" class="btn btn-sm">Détails</a>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p>Aucun livre trouvé pour cet auteur.</p>
+        <% } %>
+    </div>
+</div>
+<%- include('../../partials/footer') %>

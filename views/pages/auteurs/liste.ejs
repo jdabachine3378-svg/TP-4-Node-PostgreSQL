@@ -1,0 +1,40 @@
+<%- include('../../partials/header') %>
+<div class="container">
+    <div class="page-header">
+        <h1>Auteurs</h1>
+        <a href="/auteurs/ajouter" class="btn btn-primary">Ajouter un auteur</a>
+    </div>
+    <% if (auteurs && auteurs.length > 0) { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Date de naissance</th>
+                    <th>Nationalité</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% auteurs.forEach(auteur => { %>
+                    <tr>
+                        <td><%= auteur.nom %></td>
+                        <td><%= auteur.prenom %></td>
+                        <td class="format-date"><%= auteur.date_naissance || '-' %></td>
+                        <td><%= auteur.nationalite || '-' %></td>
+                        <td>
+                            <a href="/auteurs/<%= auteur.id %>" class="btn btn-sm">Détails</a>
+                            <a href="/auteurs/<%= auteur.id %>/modifier" class="btn btn-sm">Modifier</a>
+                            <form action="/auteurs/<%= auteur.id %>/supprimer" method="POST" style="display:inline;">
+                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet auteur ?')">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <p>Aucun auteur trouvé.</p>
+    <% } %>
+</div>
+<%- include('../../partials/footer') %>
